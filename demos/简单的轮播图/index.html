@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            width: 6666px;
+            padding-left: 0;
+            transition: all 2s;
+        }
+        ul::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+        li {
+            width: 300px;
+            float: left;
+            margin-right: 20px;
+        }
+        .wrap-ul {
+            width: 300px;
+            overflow: hidden;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap-ul">
+        <ul>
+            <li><img src="img/0.jpg"></li>
+            <li><img src="img/1.jpg"></li>
+            <li><img src="img/2.jpg"></li>
+            <li><img src="img/3.jpg"></li>
+            <li><img src="img/4.jpg"></li>
+        </ul>
+    </div>
+    <script>
+        var isgo = false;
+        var count = 0;
+        var ulEle = document.getElementsByTagName('ul')[0];
+        function changeImg() {
+            setInterval(function() {
+                if (isgo == false) {
+                    count++;
+                    ulEle.style.transform = 'translate(' + -320*count + 'px)';
+                    if (count >= 4) {
+                        isgo = true;
+                    }
+                } else {
+                    count--;
+                    ulEle.style.transform = 'translate(' + -320*count + 'px)';
+                    if (count == 0) {
+                        isgo = false;
+                    }
+                }
+            },2500);
+        }
+        changeImg();
+    </script>
+</body>
+</html>

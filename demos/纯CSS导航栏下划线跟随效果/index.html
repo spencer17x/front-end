@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>纯CSS导航栏下划线跟随效果</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            float: left;
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        li::before {
+            content:'';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            border-bottom: 2px solid #000;
+            transition: 0.2s all linear;
+        }
+
+        li::after {
+            content:'';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            width: 0;
+            height: 100%;
+            border-bottom: 2px solid #000;
+            transition: 0.2s all linear;
+        }
+
+        li:hover::after {
+            width: 50%;
+            right: 0;
+        }
+
+        li:hover::before {
+            width: 50%;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>不可思议的css</li>
+        <li>导航栏</li>
+        <li>光标下划线跟随</li>
+        <li>PURE CSS</li>
+        <li>Nav Underline</li>
+    </ul>
+</body>
+</html>
