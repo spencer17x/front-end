@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8" />
     <title>小测试(5)</title>
+    <style>
+        .div1 {
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+        }
+        .div2 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 50px;
+        }
+    </style>
 </head>
 <body>
+    <div class="div1">
+        div1
+    </div>
+    <!-- <div class="div2">
+        div2
+    </div> -->
     <script>
         // 'use strict';
         // function show() {
@@ -12,6 +33,36 @@
         //     console.log(arguments);
         // }
         // show(1,4,6);
+
+        // 'use strict';
+        // try {
+        //     var a = 123;
+        //     consle.log(a);
+        // } catch(e) {
+        //     var c = 666;
+        //     console.log(e.message);
+        //     console.log(c);
+        // }
+        // console.log(a);
+        // console.log(c);
+
+        var lastTime = 0;
+        var key = false;
+        document.onmousedown = function () {
+            firstTime = new Date().getTime();
+        }
+        document.onmouseup = function () {
+            lastTime = new Date().getTime();
+            if (lastTime - firstTime < 300) {
+                key = true;
+            }
+        }
+        document.onclick = function () {
+            if (key) {
+                console.log('click');
+                key = false;
+            }
+        }
     </script>
 </body>
 </html>
