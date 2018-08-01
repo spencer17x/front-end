@@ -6,7 +6,17 @@
 </head>
 <body>
     <script>
+        var blValue = new Boolean(null);
+        console.log(blValue.valueOf());
 
+        var obj = new Object(123);
+        console.log(obj.valueOf());
+        console.log(typeof obj.valueOf());
+
+        var strObj = new String('a');
+        console.log(isNaN(blValue));
+        console.log(isNaN(strObj));
+        console.log(typeof strObj);
     </script>
 </body>
 </html>
