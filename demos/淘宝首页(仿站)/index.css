@@ -13,7 +13,113 @@ html,body {
     width: 100%;
     height: 100%;
 }
-.wrapper .top-nav-wrapper {
+.wrapper .top-nav-wrap {
     width: 100%;
     height: 35px;
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+}
+.wrapper .top-nav-wrap .top-nav {
+    width: 1190px;
+    height: 35px;
+    margin: 0 auto;
+    /* border: 1px solid black; */
+}
+.wrapper .top-nav-wrap .top-nav .top-nav-l {
+    float: left;
+}
+.wrapper .top-nav-wrap .top-nav .top-nav-r {
+    float: right;
+}
+.wrapper .top-nav-wrap .top-nav li {
+    float: left;
+    margin-left: 7px;
+}
+.wrapper .top-nav-wrap .top-nav li a {
+    color: #6c6c6c;
+    font-size:12px;
+    line-height: 35px;
+    padding: 0 6px;
+}
+.wrapper .top-nav-wrap .top-nav li a:hover,
+.wrapper .top-nav-wrap .top-nav li .login {
+    color: #f40;
+}
+.wrapper .top-nav-wrap .top-nav .china {
+    color: #3c3c3c; 
+    font-size: 12px;
+    line-height: 35px;
+}
+.wrapper .top-nav-wrap .top-nav .china-span {
+    padding: 0 6px;
+}
+.wrapper .top-nav-wrap .top-nav .cutOff span {
+    color: #ddd;
+    line-height: 35px;
+}
+.wrapper .top-nav-wrap .top-nav .bgPic {
+    display: inline-block;
+    width: 6px;
+    height: 3px;
+    vertical-align: middle;
+    background-size: 100% 100%;
+    /* border: 1px solid black; */
+}
+.wrapper .top-nav-wrap .top-nav .xsjPic{
+    background-image: url('img/xsj.png');
+}
+.wrapper .top-nav-wrap .top-nav .shopCarPic {
+    background-image: url('img/gwc.png');
+    width: 12px;
+    height: 12px;
+}
+.wrapper .top-nav-wrap .top-nav .likePic {
+    background-image: url('img/star.png');
+    width: 12px;
+    height: 11px;
+}
+.wrapper .top-nav-wrap .top-nav .webNavPic {
+    background-image: url('img/dh.png');
+    width: 8px;
+    height: 8px;
+}
+/* 导航条结束 */
+.wrapper .search-wrap {
+    width: 100%;
+    height: 97px;
+    border: 1px solid black;
+    background-color: #fff;
+    padding-top: 24px;
+    padding-bottom: 9px;
+}
+.wrapper .search-wrap .search-con {
+    width: 1190px;
+    height: 88px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+.wrapper .search-wrap .search-con .logo-box img {
+    width: 100%;
+    height: 100%;
+}
+.wrapper .search-wrap .search-con .logo-box {
+    width: 190px;
+    height: 80px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: middle;
+}
+.wrapper .search-wrap .search-con .search-box {
+    height: 87px;
+    width: 627px;
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+}
+.wrapper .search-wrap .search-con .code-box {
+    height: 90px;
+    width: 76px;
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: middle;
 }
