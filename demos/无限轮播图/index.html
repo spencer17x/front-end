@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrap {
+			width: 300px;
+			overflow: hidden;
+			border:  4px solid #eee;
+			height: 224px;
+			position: relative;
+		}
+		.wrap-img {
+			width: 2100px;
+			position: absolute;
+			height: 100%;
+			font-size: 0;
+		}
+		.wrap-img img {
+			width: 300px;
+		}
+		.btns-circle {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -35px;
+		}
+		.btn-circular {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background: #fff;
+			border-radius: 50%;
+		}
+		.prev {
+			position: absolute;
+			z-index: 1;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			margin-top: -15px;
+			margin-left:  10px;
+			background: #fff;
+			line-height: 30px;
+			text-align: center;
+			opacity: .5;
+		}
+		.prev:hover,.next:hover {
+			cursor: pointer;
+		}
+		.next {
+			position: absolute;
+			z-index: 1;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			margin-top: -15px;
+			margin-left:  10px;
+			background: #fff;
+			line-height: 30px;
+			text-align: center;
+			opacity: .5;
+			right: 10px;
+		}
+		.on {
+			background:  #f40;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="btn-change">
+			<span class="prev">&lt;</span>
+			<span class="next">&gt;</span>
+		</div>
+		<div class="wrap-img" style="left: -300px;">
+			<img src="img/4.jpg" alt="">
+			<img src="img/0.jpg" alt="">
+			<img src="img/1.jpg" alt="">
+			<img src="img/2.jpg" alt="">
+			<img src="img/3.jpg" alt="">
+			<img src="img/4.jpg" alt="">
+			<img src="img/0.jpg" alt="">
+		</div>
+		<div class="btns-circle">
+			<span class="btn-circular on"></span>
+			<span class="btn-circular"></span>
+			<span class="btn-circular"></span>
+			<span class="btn-circular"></span>
+			<span class="btn-circular"></span>
+		</div>
+	</div>
+
+	<script>
+		(function () {
+			let prev = document.getElementsByClassName('prev')[0],
+				next = document.getElementsByClassName('next')[0],
+				wrapImg = document.getElementsByClassName('wrap-img')[0];
+			function animated(offlength) {
+				let num = parseInt(wrapImg.style.left);
+				if (num <= -1800) {
+					return -300;
+				}
+				return num + offlength;
+			}
+			next.onclick = function () {
+				wrapImg.style.left = animated(-300) + 'px';
+				console.log(wrapImg.style.left);
+			}
+
+		})();
+	</script>
+</body>
+</html>
