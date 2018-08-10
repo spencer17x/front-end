@@ -93,23 +93,7 @@
 	</div>
 
 	<script>
-		(function () {
-			let prev = document.getElementsByClassName('prev')[0],
-				next = document.getElementsByClassName('next')[0],
-				wrapImg = document.getElementsByClassName('wrap-img')[0];
-			function animated(offlength) {
-				let num = parseInt(wrapImg.style.left);
-				if (num <= -1800) {
-					return -300;
-				}
-				return num + offlength;
-			}
-			next.onclick = function () {
-				wrapImg.style.left = animated(-300) + 'px';
-				console.log(wrapImg.style.left);
-			}
 
-		})();
 	</script>
 </body>
 </html>
