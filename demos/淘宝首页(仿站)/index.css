@@ -380,7 +380,7 @@ html,body {
 .wrapper .screen-box-wrap .main .main-inner .inner-left ul li span {
     position: absolute;
     display: inline-block;
-    right: 0;
+    right: 8px;
     height: 8px;
     width: 5px;
     background-image: url('img/yjt.png');
@@ -391,8 +391,62 @@ html,body {
 .wrapper .screen-box-wrap .main .main-inner .inner-con {
     width: 520px;
     height: 522px;
-    /* background-color: red; */
     float: left;
+    /* background-color: red; */
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-con .pic-box {
+    position: relative;
+    width: 520px;
+    height: 280px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-con .pic-box ul {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    /* width: 70px; */
+    margin-left: -35px;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 10px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-con .pic-box ul li {
+    float: left;
+    margin: 3px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-con .pic-box ul li a {
+    display: block;
+    width: 8px;
+    padding-top: 8px;
+    height: 0;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-con .pic-box ul li .select {
+    background-color: #ff5000;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-mall {
+    width: 520px;
+    height: 230px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-mall img {
+    width: 520px;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-mall .head {
+    width: 520px;
+    height: 22px;
+    border-bottom: 3px solid #ff1648;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-mall .head .tm-pic {
+    display: inline-block;
+    width: 136px;
+    height: 20px;
+    background-image: url('img/tm.png');
+    background-size: 100% 100%;
+}
+.wrapper .screen-box-wrap .main .main-inner .inner-mall .head .tm {
+    color: #666;
+    font-size: 12px;
 }
 .wrapper .screen-box-wrap .main .col-middle {
     width: 160px;
