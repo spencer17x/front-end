@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div style="zoom: normal;"></div>
+    <script>
+        $(function () {
+            function zoomImg(o) {
+                var zoom = parseInt(o.style.zoom,10) || 100;
+                zoom += event.wheelDelta/2;
+                console.log(o.style.zoom);
+                if (zoom > 0) {
+                    o.style.zoom = zoom + '%';
+                }
+            }
+            $(document).ready(function () {
+                $('div').bind('wheel',function (event) {
+                    zoomImg(this);
+                    return false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
