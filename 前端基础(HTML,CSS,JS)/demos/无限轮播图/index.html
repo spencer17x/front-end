@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrapper {
+			width: 300px;
+			height: 225px;
+			overflow: hidden;
+			position: relative;
+			border: 5px solid #666;
+		}
+		.img-group {
+			width: 2100px;
+			position: absolute;
+			font-size: 0;
+			/* transition: all .4s; */
+		}
+		.img-group img {
+			width: 300px;
+		}
+		.btn-group {
+			font-size: 0;
+			width: 70px;
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			margin-left: -35px;
+		}
+		.btn-group span {
+			margin-right: 5px;
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background: #fff;
+			border-radius: 50%;
+		}
+		.btn-group span:hover {
+			cursor: pointer;
+		}
+		.btn-group span:last-child {
+			margin-right: 0;
+		}
+		.btn-group span.on {
+			background: #f40;
+		}
+		.btn-two {
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+			width: 100%;
+		}
+		.btn-two span {
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			background: #555;
+			text-align: center;
+			line-height: 30px;
+			opacity: .6;
+			display: none;
+			font-size: 22px;
+		}
+		.wrapper:hover .btn-two span {
+			display: block;
+		}
+		.btn-two span:hover {
+			cursor: pointer;
+			background: #fff;
+		}
+		.prev {
+			position: absolute;
+			left: 10px;
+		}
+		.next {
+			position: absolute;
+			right: 10px;;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="img-group" style="left: -300px;">
+			<img src="img/4.jpg" alt="">
+			<img src="img/0.jpg" alt="">
+			<img src="img/1.jpg" alt="">
+			<img src="img/2.jpg" alt="">
+			<img src="img/3.jpg" alt="">
+			<img src="img/4.jpg" alt="">
+			<img src="img/0.jpg" alt="">
+		</div>
+		<div class="btn-group">
+			<span class="on" index="0"></span>
+			<span index="1"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+		</div>
+		<div class="btn-two">
+			<span class="prev">&lt;</span>
+			<span class="next">&gt;</span>
+		</div>
+	</div>
+	<script>
+		let wrapper = document.getElementsByClassName('wrapper')[0],
+			next = document.getElementsByClassName('next')[0],
+			prev = document.getElementsByClassName('prev')[0],
+			imgGroup = document.getElementsByClassName('img-group')[0],
+			btnGroup = document.getElementsByClassName('btn-group')[0],
+			btnSpan = btnGroup.getElementsByTagName('span'),
+			index = 0,
+			state = false,
+			timer;
+		//圆点切换
+		for (let i = 0; i < btnSpan.length; i++) {
+			btnSpan[i].onclick = function () {
+				if (this.className == 'on') {
+					return;
+				}
+				let myIndex = parseInt(this.getAttribute('index')),
+					offset = -300*(myIndex - index);
+				animate(offset);
+				index = myIndex;
+				showBtn();
+			};
+		}
+		//动画图片切换
+		function animate(offset) {
+			state = true;
+			let time = 300, //位移总时间
+				interval = 10, //位移间隔时间
+				speed = offset/(time/interval),
+				newLeft = parseInt(imgGroup.style.left) + offset;
+			function go() {
+				if((speed < 0 && parseInt(imgGroup.style.left) > newLeft) || (speed > 0 && parseInt(imgGroup.style.left) < newLeft)){
+							imgGroup.style.left = parseInt(imgGroup.style.left) + speed + "px";
+							setTimeout(go,interval);
+				} else {
+					state = false;
+					imgGroup.style.left = newLeft + "px";
+					if(parseInt(imgGroup.style.left) < -1500){
+						imgGroup.style.left = -300 + "px";
+					}	
+					if(parseInt(imgGroup.style.left) > -300){
+						imgGroup.style.left = -1500 + "px";
+					}
+				}
+			}
+			go();
+		}
+		function play() {
+			timer = setInterval(function () {
+				next.onclick();
+			},2500);
+		}
+		function stop() {
+			clearInterval(timer);
+		}
+		wrapper.onmouseover = stop;
+		wrapper.onmouseout = play;
+		play();
+		//当前图片所对应的圆点
+		function showBtn() {
+			for (let i = 0; i < btnSpan.length; i++) {
+				if (btnSpan[i].className == 'on') {
+					btnSpan[i].className = '';
+				}
+			}
+			btnSpan[index].className = 'on';
+		}
+		//点击下一张图片按钮
+		next.onclick = function () {
+			if (index == 4) {
+				index = 0;
+			} else {
+				index++;
+			}
+			showBtn();
+			if (!state) {
+				animate(-300); // 向左偏移
+			}
+		};
+		//点击上一张图片按钮
+		prev.onclick = function () {
+			if (index == 0) {
+				index = 4;
+			} else {
+				index--;
+			}
+			showBtn();
+			if (!state) {
+				animate(300);
+			}
+		};
+	</script>
+</body>
+</html>
