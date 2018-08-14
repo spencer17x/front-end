@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>会动的css</title>
+    <style id="styleType"></style>
+</head>
+<body>
+    <pre id="content"></pre>
+
+    <script>
+        var styleType = document.getElementById('styleType'),
+            content = document.getElementById('content'),
+            contentStr = '\/* 用一些简单的 css 进行检验 *\/\n\/* 设置个宽、高、背景颜色跟字体颜色 *\/\n #content {\n  width: 250px;\n  height: 200px;\n  background: #666;\n  color: #fff;\n}',
+            count = 0,
+            controller = setInterval(put, 50);
+        function put() {
+            count++;
+            if (count > 0 && count <= contentStr.length) {
+                content.innerHTML = contentStr.substring(0,count);
+                styleType.innerHTML = contentStr.substring(0,count);
+            }
+        }
+    </script>
+</body>
+</html>
