@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单的todoList</title>
+	<script src="../vue.js"></script>
+	<style type="text/css">
+		li {
+			float: left;
+		}
+		.list-div {
+			width: 200px;
+			margin-top: 20px;
+		}
+		.list-div:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.list-div button {
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input v-model="inputValue" @keyup.enter="addList">
+		<button @click="addList">提交</button>
+		<ul>
+			<div v-for="(list,index) of lists" class="list-div">
+				<li>{{list}}</li>
+				<button @click="deleteList(index)">删除</button>
+			</div>
+		</ul>
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				lists: [],
+				inputValue: ''
+			},
+			methods: {
+				addList () {
+					this.lists.push(this.inputValue)
+					this.inputValue = ''
+				},
+				deleteList (index) {
+					this.lists.splice(index,1)
+				}
+			}
+		})
+	</script>
+</body>
+</html>
