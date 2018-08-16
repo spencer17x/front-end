@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>jq实现todoList(MVP模式)</title>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" id="input">
+		<button id="btn">提交</button>
+		<ul></ul>
+	</div>
+	<script>
+		function Page() {}
+		$.extend(Page.prototype,{
+			init () {
+				this.handleBtn();
+			},
+			handleBtn () {
+				$('#btn').on('click',$.proxy(Page.prototype.handleClick,this));
+			},
+			handleClick () {
+				let input = $('#input'),
+					inputValue = input.val(),
+					ul = $('ul');
+				ul.append(`<li>${inputValue}</li>`);
+				input.val('');
+			}
+		});
+		let page = new Page();
+		page.init();
+	</script>
+</body>
+</html>
