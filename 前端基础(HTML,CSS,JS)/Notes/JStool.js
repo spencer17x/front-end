@@ -96,3 +96,15 @@ function hasQuickTime(){
 alert(hasFlash());
 //检测 QuickTime
 alert(hasQuickTime());
+
+// IE5.0 之前的版本不支持 document.getElementById()这个 DOM 方法
+function getElement(id) {
+    if (document.getElementById) {
+        return document.getElementById(id);
+    } else if (document.all) {
+        return document.all[id];
+    } else {
+        throw new Error("No way to retrieve element!");
+    }
+}
+
