@@ -108,3 +108,23 @@ function getElement(id) {
     }
 }
 
+// 迭代元素的每一个特性，然后将它们构造成 name="value" name="value"这样的字符串格式，
+// 每个特性节点都有一个名为 specified 的属性，这个属性的值如果为 true，则意味着要么是在 HTML 中指
+// 定了相应特性，要么是通过 setAttribute()方法设置了该特性。在 IE 中，所有未设置过的特性的该
+// 属性值都为 false，而在其他浏览器中根本不会为这类特性生成对应的特性节点（因此，在这些浏览器
+// 中，任何特性节点的 specified 值始终为 true）。
+function outputAttributes(element){
+	var pairs = new Array(),
+		attrName,
+		attrValue,
+		i,
+		len;
+	for (i=0, len=element.attributes.length; i < len; i++) {
+		attrName = element.attributes[i].nodeName;
+		attrValue = element.attributes[i].nodeValue;
+		if (element.attributes[i].specified) {
+			pairs.push(attrName + "=\"" + attrValue + "\"");
+		}
+	}
+	return pairs.join(" ");
+} 
