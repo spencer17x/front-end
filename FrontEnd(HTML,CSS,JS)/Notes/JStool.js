@@ -113,6 +113,7 @@ function getElement(id) {
 // 定了相应特性，要么是通过 setAttribute()方法设置了该特性。在 IE 中，所有未设置过的特性的该
 // 属性值都为 false，而在其他浏览器中根本不会为这类特性生成对应的特性节点（因此，在这些浏览器
 // 中，任何特性节点的 specified 值始终为 true）。
+// 可以确保即使在 IE7 及更早的版本中，也会只返回指定的特性。
 function outputAttributes(element){
 	var pairs = new Array(),
 		attrName,
@@ -127,4 +128,47 @@ function outputAttributes(element){
 		}
 	}
 	return pairs.join(" ");
+} 
+
+//动态创建脚本
+function loadScript(url){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url;
+    document.body.appendChild(script);
+} 
+//尝试标准的 DOM 文本节点方法，因为除了 IE（在 IE 中会导致抛出错误），所有浏览器
+// 都支持这种方式。如果这行代码抛出了错误，那么说明是 IE，于是就必须使用 text 属性了。
+function loadScriptString(code){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    try {
+        script.appendChild(document.createTextNode(code));
+    } catch (ex){
+        script.text = code;
+    }
+    document.body.appendChild(script);
+} 
+
+//动态样式
+function loadStyles(url){
+    var link = document.createElement("link"); 
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = url;
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(link);
+} 
+//与动态添加嵌入式脚本类似，重写后的代码使用了 try-catch 语句来捕获 IE 抛出的错误，然后再
+// 使用针对 IE 的特殊方式来设置样式。
+function loadStyleString(css){
+    var style = document.createElement("style"); 
+    style.type = "text/css";
+    try{
+        style.appendChild(document.createTextNode(css));
+    } catch (ex) {
+        style.styleSheet.cssText = css;
+    }
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(style);
 } 
