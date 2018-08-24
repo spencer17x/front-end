@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{fullName}}
+		{{age}}
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				firstName: 'Dell',
+				lastName: 'Lee',
+				age: 26,
+				fullName: 'Dell Lee'
+			},
+			watch: {
+				firstName () {
+					console.log('计算了一次')
+					this.fullName = this.firstName + this.lastName
+				},
+				lastName () {
+					console.log('计算了一次')
+					this.fullName = this.firstName + this.lastName
+				}
+			}
+			// methods: {
+			// 	// 改变age，页面重新渲染，fullName重新执行一次，没有缓存机制
+			// 	fullName () {
+			// 		console.log('计算了一次')
+			// 		return this.firstName + ' ' + this.lastName
+			// 	}
+			// }
+			// 计算属性，有缓存机制
+			// computed: {
+			// 	fullName () {
+			// 		console.log('计算了一次')
+			// 		return this.firstName + ' ' + this.lastName
+			// 	}
+			// }
+		})
+	</script>
+</body>
+</html>

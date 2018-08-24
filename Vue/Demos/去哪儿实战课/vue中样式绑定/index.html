@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue.js"></script>
+	<style>
+		.actived {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div :class="{actived: isActived}" @click="handleClick">{{msg}}</div>
+		<!-- <div :class="[actived,activedOne]" @click="handleClick">{{msg}}</div> -->
+		<!-- <div :style="[styleObj]" @click="handleClick">{{msg}}</div> -->
+		<!-- <div :style="{color: isColor}" @click="handleClick">{{msg}}</div> -->
+		<!-- <div :style="styleObj" @click="handleClick">{{msg}}</div> -->
+		<!-- <div v-bind:class="[isActive ? activeClass : '']"></div> -->
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				msg: 'hello world',
+				isActived: false
+				// actived: '',
+				// activedOne: 'actived-one'
+				// styleObj: {
+				// 	color: 'black'
+				// }
+				// isColor: 'black'
+				// styleObj: {
+				// 	color: 'black'
+				// }
+				// isActive: true,
+				// activeClass: 'hello'
+			},
+			methods: {
+				handleClick () {
+					this.isActived = !this.isActived
+					// this.actived = this.actived === '' ? 'actived' : ''
+					// this.styleObj.color = this.styleObj.color === 'black' ? 'red' : 'black'
+					// this.isColor = this.isColor === 'black' ? 'red' : 'black'
+					// this.styleObj.color = this.styleObj.color === 'black' ? 'red' : 'black'
+				}
+			}
+		})
+	</script>
+</body>
+</html>
