@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<template v-if='show'>
+			<label>Username:</label>
+			<input placeholder="username" key="username">
+		</template>
+		<template v-else>
+			<label>password:</label>
+			<input placeholder="password" key="password">
+		</template>
+		<button @click="toggleLogin">Toggle login type</button>
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				show: true
+			},
+			methods: {
+				toggleLogin () {
+					this.show = !this.show
+				}
+			}
+		})
+	</script>
+</body>
+</html>
