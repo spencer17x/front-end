@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child>
+      <!-- <h1></h1> -->
+      <!-- <div slot="header">header</div> -->
+      <div slot="footer">footer</div>
+    </child>
+  </div>
+
+  <script>
+    Vue.component('Child',{
+      // template: '<div><p>hi</p><slot><h1>默认值</h1></slot></div>'
+      template: `<div>
+                  <slot name="header">default value</slot>
+                  <div>body</div>
+                  <slot name="footer">footer</slot>
+                </div>`
+    })  
+    var vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

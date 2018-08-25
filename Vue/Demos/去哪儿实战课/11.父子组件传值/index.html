@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <todo-item @inc="handleAdd" :count="666"></todo-item>
+    <todo-item @inc="handleAdd" count="123"></todo-item>
+    <div>{{result}}</div>
+  </div>
+
+  <script>
+    var TodoItem = {
+      template: '<div @click="handleClick">{{num}}</div>',
+      data () {
+        return {
+          num: 0
+        }
+      },
+      props: ['count'],
+      methods: {
+        handleClick () {
+          console.log(typeof this.count,this.count)
+          this.num++
+          this.$emit('inc',1)
+        }
+      }
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        result: 0
+      },
+      components: {
+        TodoItem
+      },
+      methods: {
+        handleAdd (step) {
+          this.result += step
+        }
+      }
+    })
+  </script>
+</body>
+</html>

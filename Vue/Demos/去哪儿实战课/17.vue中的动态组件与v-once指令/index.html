@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- <child-one v-if="show"></child-one>
+    <child-two v-else></child-two> -->
+    <component :is="child"></component>
+    <button @click="toggleChild">toggle</button>
+  </div>
+
+  <script>
+    Vue.component('ChildOne',{
+      template: '<div v-once>child-one</div>'
+    })
+    Vue.component('ChildTwo',{
+      template: '<div v-once>child-two</div>'
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        // show: true
+        child: 'child-one'
+      },
+      methods: {
+        toggleChild () {
+          // this.show = !this.show
+          this.child = this.child === 'child-one' ? 'child-two' : 'child-one'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
