@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+      <textarea v-model="textVal"></textarea>
+      {{textVal}}
+      <div>
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+      </div>
+  </div>
+  <br>
+  <div id="example-5">
+    <select v-model="selected">
+      <option value="">请选择</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+  </div>
+  <br>
+  <div id="example-6">
+    <select v-model="selected" multiple style="width: 50px;">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected }}</span>
+    <br>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        textVal: '',
+        checked: false
+      }
+    })
+    new Vue({
+      el: '#example-5',
+      data: {
+        selected: ''
+      }
+    })
+    new Vue({
+      el: '#example-6',
+      data: {
+        selected: ['A']
+      }
+    })
+  </script>
+</body>
+</html>

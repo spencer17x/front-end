@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="blog-posts-events-demo">
+      <div :style="{ fontSize: postFontSize + 'em'}">
+        <blog-post
+          @change="postFontSize += $event"
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        ></blog-post>
+      </div>
+      <!-- <custom-input v-model="searchText"></custom-input>
+      {{searchText}} -->
+    </div>
+
+    <script>
+      // Vue.component('custom-input', {
+      //   props: ['value'],
+      //   template: `
+      //     <input
+      //       v-bind:value="value"
+      //       v-on:input="$emit('input', $event.target.value)"
+      //     >
+      //   `
+      // })
+      // new Vue({
+      //   el: '#blog-posts-events-demo',
+      //   data: {
+      //     searchText: ''
+      //   }
+      // })
+      Vue.component('blog-post', {
+        props: ['post'],
+        template: `
+          <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <button @click="$emit(\'change\',0.1)">
+              Enlarge text
+            </button>
+            <div v-html="post.content"></div>
+          </div>
+        `
+      })
+      new Vue({
+        el: '#blog-posts-events-demo',
+        data: {
+          posts: [
+            { id: 1, title: 'My journey with Vue' },
+            { id: 2, title: 'Blogging with Vue' },
+            { id: 3, title: 'Why Vue is so fun' }
+          ],
+          postFontSize: 1
+        }
+      })
+    </script>
+</body>
+</html>
