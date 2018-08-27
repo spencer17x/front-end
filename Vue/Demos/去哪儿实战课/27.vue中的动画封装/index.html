@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <script src="./velocity.js"></script>
+</head>
+<body>
+  <div id="app">
+    <fade :show="show">
+      <div>hello world</div>
+    </fade>
+    <fade :show="show">
+        <h1>hello world</h1>
+      </fade>
+    <button @click="handleToggle">toggle</button>
+  </div>
+  
+  <script>
+    var Fade = {
+      props: ['show'],
+      template: `<transition 
+                  @before-enter="handleBeforeEnter"
+                  @enter="handleEnter" 
+                  @leave="handleLeave">
+                    <slot v-if="show"></slot>
+                 </transition>`,
+      methods: {
+        handleBeforeEnter (el) {
+          el.style.opacity = 0
+        },
+        handleEnter (el,done) {
+          Velocity(el,{
+            opacity: 1
+          }, {
+            duration: 1000,
+            complete: done
+          })
+        },
+        handleLeave (el,done) {
+          Velocity(el,{
+            opacity: 0
+          }, {
+            duration: 1000,
+            complete: done
+          })
+        }
+      }
+    }
+    new Vue({
+      el: '#app',
+      data: {
+        show: true
+      },
+      methods: {
+        handleToggle () {
+          this.show = !this.show
+        }
+      },
+      components: {
+        Fade
+      }
+    })
+  </script>
+</body>
+</html>

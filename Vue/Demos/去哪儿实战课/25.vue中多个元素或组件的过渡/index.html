@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <style>
+    .v-enter,.v-leave-to {
+      opacity: 0;
+    }
+    .v-enter-active,.v-leave-active {
+      transition: opacity 1s;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <transition mode="out-in">
+      <div v-if="show" key="hello">hello world</div>
+      <div v-else key="bye">bye world</div>
+    </transition>
+    <button @click="handleToggle">toggle</button>
+  </div>
+
+  <div id="app2">
+    <transition mode="out-in">
+      <child :is="child"></child>
+    </transition>
+    <button @click="handleToggle">toggle</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        show: true
+      },
+      methods: {
+        handleToggle () {
+          this.show = !this.show
+        }
+      }
+    })
+    
+    var ChildOne = {
+      template: '<div>child-one</div>'
+    }
+    var ChildTwo = {
+      template: '<div>child-two</div>'
+    }
+    new Vue({
+      el: '#app2',
+      data: {
+        child: 'child-one'
+      },
+      methods: {
+        handleToggle () {
+          this.child = this.child === 'child-one' ? 'child-two' : 'child-one'
+        }
+      },
+      components: {
+        ChildOne,
+        ChildTwo
+      }
+    })
+  </script>
+</body>
+</html>

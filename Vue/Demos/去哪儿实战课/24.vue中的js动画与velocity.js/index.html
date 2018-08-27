@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <script src="./velocity.js"></script>
+</head>
+<body>
+  <div id="app">
+    <transition 
+      name="fade"
+      @before-enter="hanldeBeforeEnter"
+      @enter="hanldeEnter"
+      @after-enter="handleAfterEnter"
+      @before-leave="hanldeBeforeLeave"
+      @leave="hanldeLeave"
+      @after-enter="handleAfterLeave">
+      <div v-if="show">hello world</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+  </div>
+  <div id="app2">
+      <transition 
+        name="fade"
+        @before-enter="hanldeBeforeEnter"
+        @enter="hanldeEnter"
+        @after-enter="handleAfterEnter"
+        @before-leave="hanldeBeforeLeave"
+        @leave="hanldeLeave"
+        @after-enter="handleAfterLeave">
+        <div v-if="show">hello world</div>
+      </transition>
+      <button @click="handleClick">toggle</button>
+    </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick () {
+          this.show = !this.show
+        },
+        hanldeBeforeEnter (el) {
+          el.style.color = 'red'
+        },
+        hanldeEnter (el,done) {
+          setTimeout(function () {
+            el.style.fontSize = '22px'
+          },3000)
+          setTimeout(done,5000)
+        },
+        handleAfterEnter (el) {
+          el.style.color = 'green'
+        },
+        hanldeBeforeLeave (el) {
+          console.log('beforeLeave')
+          el.style.color = 'blue'
+        },
+        hanldeLeave (el,done) {
+          console.log(el,'leave')
+          done()
+        },
+        handleAfterLeave (el) {
+          console.log('afterLeave')
+        }
+      }
+    })
+    new Vue({
+      el: '#app2',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick () {
+          this.show = !this.show
+        },
+        hanldeBeforeEnter (el) {
+          el.style.opacity = 0
+        },
+        hanldeEnter (el,done) {
+          Velocity(el,{
+            opacity: 1,
+            fontSize: '30px'
+          },{
+            duration: 4000,
+            complete: done
+          })
+        },
+        handleAfterEnter (el) {
+          console.log('动画结束')
+        },
+        hanldeBeforeLeave (el) {
+          console.log('beforeLeave')
+        },
+        hanldeLeave (el,done) {
+          console.log(el,'leave')
+          done()
+        },
+        handleAfterLeave (el) {
+          console.log('afterLeave')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
