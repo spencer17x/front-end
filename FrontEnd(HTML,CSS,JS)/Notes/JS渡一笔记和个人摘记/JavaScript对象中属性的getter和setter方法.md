@@ -89,3 +89,4 @@ myObj.a = 3;
 var anotherObj = Object.create(myObj);
 console.log(anotherObj.a);//3
 ```
+

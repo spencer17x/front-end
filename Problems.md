@@ -2,7 +2,7 @@ jq中$.post在360浏览器中的问题，select中获取选中的option的元素
 
 <https://diveng.io/firefox-and-chrome-browser-extensions-proxy-switchyomega-instructions.html> 
 
-垃圾回收, proxy，rhs取值，箭头函数this的指向，jq中extend和proxy方法，jq序列化 
+垃圾回收, proxy，rhs取值
 
 jquery实现textarea 高度自适应：<https://blog.csdn.net/lijunlinlijunlin/article/details/51092909> 
 
