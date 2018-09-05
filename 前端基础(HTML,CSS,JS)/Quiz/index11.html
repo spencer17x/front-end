@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Person {}
+    Person.getInstance = (function () {
+      console.log('我被执行了')
+      let instance
+      return function () {
+        if (!instance) {
+          instance = new Person();
+        } 
+        return instance
+      }
+    })()
+    let p1 = Person.getInstance()
+    let p2 = Person.getInstance()
+    console.log(p1 === p2)
+  </script>
+</body>
+</html>
