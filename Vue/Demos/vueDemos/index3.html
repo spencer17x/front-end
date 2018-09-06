@@ -9,18 +9,19 @@
 </head>
 <body>
   <div id="app">
-    <input type="text" v-model.number="msg" placeholder="hello world">
-    <input type="text" v-model.number="msg" placeholder="hello world">
-    <input type="text" @input="searchText = $event.target.value">
-    {{searchText}}
+    <input type="text" @keyup.enter.space="keyUp">
+    <input type="text" @keyup.shift="shift">
   </div>
-
   <script>
-    const vm = new Vue({
+    new Vue({
       el: '#app',
-      data: {
-        msg: '',
-        searchText: ''
+      methods: {
+        keyUp () {
+          console.log(1)
+        },
+        shift () {
+          console.log(2)
+        }
       }
     })
   </script>
