@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="msg of list">{{msg}}</li>
+    </ul>
+    <child :list="list"></child>
+  </div>
+
+  <script>
+    Vue.component('Child',{
+      props: {
+        list: {
+          type: [Object, Array]
+        }
+      },
+      data () {
+        return {
+          childList: this.list.slice()
+        }
+      },
+      template: `<div>
+                    <p v-for="item of childList">{{item}}</p>
+                    <button @click="add">Add</button>  
+                </div>`,
+      methods: {
+        add () {
+          this.childList.push(2)
+        }
+      }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        list: [1,2,3,4]
+      }
+    })
+  </script>
+</body>
+</html>

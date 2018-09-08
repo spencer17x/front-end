@@ -13,7 +13,7 @@
 			a[b] = 123;
 			a[c] = 456;
 			console.log(a[b]);
-		})();
+		})(); // 456
 
 		(function () {
 			var x = 1;
@@ -24,12 +24,13 @@
 			var obj2 = {x: 2};
 			var obj3 = {x: 3};
 			var func1 = func.bind(obj1);
-			func1();
+			func1(); // 1
 			var func2 = func.bind(obj1).bind(obj2);
-			func2();
+			console.log(func.bind(obj1))
+			func2(); //1
 			var func3 = func.bind(obj1).bind(obj2).bind(obj3);
-			func3();
-		})();
+			func3(); //1
+		})(); 
 	</script>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child @child-click="parentClick"></child>
+  </div>
+
+  <script>
+    const Child = {
+      data () {
+        return {
+          childEle: 'bye world!'
+        }
+      },
+      template: `<div>
+                  <button @click="childClick">Click Me!</button>
+                </div>`,
+      methods: {
+        childClick () {
+          this.$emit('child-click',this.childEle)
+        }
+      }
+    }
+    new Vue({
+      el: '#app',
+      components: {
+        Child
+      },
+      methods: {
+        parentClick (word) {
+          console.log(word)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
