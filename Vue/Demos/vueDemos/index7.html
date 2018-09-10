@@ -8,6 +8,30 @@
   <script src="../vue.js"></script>
 </head>
 <body>
-  
+  <div id="app">
+    {{msg}}
+    <div v-for="item of 4" ref="wrapper">{{item}}</div>
+    <div v-for="list of 4">
+      <div ref="wrap">{{list}}</div>
+    </div>
+    <div ref="divele">1</div>
+    <div ref="divele">1</div>
+    <div ref="divele">1</div>
+    <div ref="divele">2</div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 123
+      },
+      mounted () {
+        console.log(this.$refs.wrapper)
+        console.log(this.$refs.wrap)
+        console.log(this.$refs.divele)
+      }
+    })
+  </script>
 </body>
 </html>
