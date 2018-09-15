@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自定义组件的 v-model</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child @input="msg = $event"></child>
+    {{msg}}
+  </div>
+
+  <script>
+    let Child = {
+      template: '<div><input @input="$emit(\'input\', $event.target.value)"></div>'
+    }
+    new Vue({
+      el: '#app',
+      data: {
+        msg: ''
+      },
+      components: {
+        Child
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- <child><h1>{{parentMsg}}</h1></child> -->
+    <child></child>
+  </div>
+
+  <script>
+    Vue.component('Child', {
+      data () {
+        return {
+          childMsg: 'I am child'
+        }
+      },
+      // template: '<div><slot></slot></div>'
+      template: '<div @click="handleBtn">{{parentList}}</div>',
+      // template: '<div @click="handleClick">click</div>',
+      methods: {
+        handleClick () {
+          console.log(this.$root.parentMsg);
+        }
+      },
+      inject: ['handleBtn', 'parentList']
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        parentMsg: 'I am father',
+        parentList: 'ffff'
+      },
+      methods: {
+        handleBtn () {
+          console.log('hahah');
+        }
+      },
+      provide: function () {
+        return {
+          handleBtn: this.handleBtn,
+          parentList: this.parentList
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>nextTick</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app" @click="doIt">{{msg}}</div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        doIt () {
+          this.$nextTick(this.handleMe)
+        },
+        handleMe () {
+          console.log(1);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
