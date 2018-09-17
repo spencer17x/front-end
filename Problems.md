@@ -8,7 +8,9 @@ jquery实现textarea 高度自适应：<https://blog.csdn.net/lijunlinlijunlin/a
 
 函数节流与防抖
 
+window.requestAnimationFrame()
 
+window.postMessage()
 
 书籍阅读
 
