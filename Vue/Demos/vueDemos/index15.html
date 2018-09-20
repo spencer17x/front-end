@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+        .v-enter-active, .v-leave-active {
+            transition: opacity .3s ease;
+        }
+    </style>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <label for="test1">test1</label>
+        <input type="radio" id="test1" v-model="picked" value="test1">
+        <label for="test2">test2</label>
+        <input type="radio" id="test2" v-model="picked" value="test2">
+        <transition mode="out-in">
+            <component :is="view"></component>
+        </transition>
+    </div>
+
+    <script>
+        let ChildOne = {
+            template: '<div>child-one</div>'
+        };
+        let ChildTwo = {
+            template: '<div>child-two</div>'
+        };
+        new Vue({
+            el: '#app',
+            data: {
+                view: 'child-one',
+                picked: 'test1'
+            },
+            watch: {
+                picked: function () {
+                    this.view = this.picked === 'test1' ? 'child-one' : 'child-two';
+                }
+            },
+            components: {
+                ChildOne,
+                ChildTwo
+            }
+        });
+    </script>
+</body>
+</html>
