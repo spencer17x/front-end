@@ -7,35 +7,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style type="text/css">
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
+    .parent {
+      width: 400px;
+      height: 200px;
+      border: 1px solid #555;
     }
-    .container {
-      width: 100%;
-      display: flex;
-      height: 100%;
-    }  
-    .menu {
-      width: 300px;
-      height: 100%;
-      background: #ccc;
-    }
-    .content {
+    .child1 {
       background: red;
-      flex: 1;
+      margin-top: 20px;
     }
-    @media screen and (max-width: 600px) {
-      
+    .child2 {
+      background: #ccc;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="menu">menu</div>
-    <div class="content">content</div>
+  <div class="parent">
+    <div class="child1">222</div>
+    <div class="child2">1111</div>
   </div>
 </body>
 
