@@ -6,10 +6,60 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
-    
+    .wrap {
+      width: 500px;
+      height: 200px;
+      border: 1px solid #555555;
+      margin: 300px auto;
+      overflow: hidden;
+    }
+    .barrage-group {
+      display: flex;
+      position: relative;
+      left: 500px;
+      width: fit-content;
+      margin-top: 20px;
+    }
+    .barrage {
+      border: 1px solid red;
+      padding: 2px 10px;
+      margin-right: 20px;
+    }
   </style>
 </head>
 <body>
-  
+  <div class="wrap">
+    <div class="barrage-group">
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+      <div class="barrage">123</div>
+    </div>
+  </div>
+
+  <script>
+    function move() {
+      let barrageG = document.getElementsByClassName('barrage-group')[0];
+      let barrageGWidth = parseInt(getComputedStyle(barrageG, null).width);
+      let leftNum = getComputedStyle(barrageG, null).left;
+      barrageG.style.left = parseInt(leftNum) - 2 + 'px';
+      if (parseInt(barrageG.style.left) < -barrageGWidth  ) {
+        barrageG.style.left = '500px';
+      }
+      window.requestAnimationFrame(move);
+    }
+    window.requestAnimationFrame(move);
+  </script>
 </body>
 </html>
