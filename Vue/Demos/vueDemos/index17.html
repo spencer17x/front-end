@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form action="">
+            add: <input type="text" v-model="inputTxt">
+            <button @click.prevent="handleAdd">add</button>
+        </form>
+        <ul>
+            <li v-for="(item, key) in obj">{{item}} —— <button @click="handleRemove(key)">remove</button></li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                obj: {},
+                count: 0,
+                inputTxt: ''
+            },
+            mounted () {
+                console.log('mounted');
+                if (localStorage.length !== 0) {
+                    this.obj = localStorage;
+                    console.log(this.obj + ' ' + typeof this.obj);
+                    for (const index in this.obj) {
+                        // if (typeof index === 'number') {
+                            console.log(index + ' ' + typeof index);
+                        // }
+                    }
+                }
+            },
+            methods: {
+                handleAdd () {
+                    localStorage.setItem(this.count, this.inputTxt);
+                    this.obj = localStorage;
+                    this.count++;
+                    this.inputTxt = '';
+                },
+                handleRemove (key) {
+                    localStorage.removeItem(key);
+                    this.obj = localStorage;             
+                }
+            }
+        })
+    </script>
+</body>
+</html>
