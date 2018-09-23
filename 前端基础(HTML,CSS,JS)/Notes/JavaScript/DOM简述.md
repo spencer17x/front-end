@@ -1,3 +1,5 @@
+# part1
+
 当你请求一个网站时：
 
 - 收到 HTML
@@ -32,4 +34,23 @@ DOM 是：
 
 - 从浏览器构建的
 - 可以通过使用 `document` 对象供 JavaScript 代码全局访问
+
+# part2 — innerHTML 和 textContent
+
+`.innerText` 会获取元素的可见文本。这是一个重要的区别！如果使用了 CSS 来隐藏该元素内的任何文本，`.innerText` 将不会返回该文本，而 `.textContent` 则会返回该文本。而且，`.innerText` 不仅遵循 CSS 的隐藏/显示性质，`.innerText` 还会遵循像大小写这样的更改。
+
+# part3 
+
+- 如果 *DOM 中已经存在*一个元素，并将该元素传递给 `.appendChild()`，则 `.appendChild()` 方法会*移动它*，而不是复制它
+- 元素的 `.textContent` 属性比使用 `.createTextNode()` 方法创建文本节点更经常被用到
+- `.insertAdjacentHTML()` 方法的第二个参数必须是文本，而不能传递一个元素
+
+可以使用 `.style.cssText` 属性一次设置多个 CSS 样式！
+
+```js
+const mainHeading = document.querySelector('h1');
+mainHeading.style.cssText = 'color: blue; background-color: orange; font-size: 3.5em';
+```
+
+请注意，在使用 `.style.cssText` 属性时，你要像在样式表中一样编写 CSS 样式；因此，要写 `font-size`，而不是 `fontSize`。这与使用单独的 `.style.<property>` 方式有所不同。
 
