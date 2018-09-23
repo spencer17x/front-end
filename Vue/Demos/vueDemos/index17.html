@@ -12,6 +12,7 @@
         <form action="">
             add: <input type="text" v-model="inputTxt">
             <button @click.prevent="handleAdd">add</button>
+            <button @click.prevent="handleReset">reset</button>
         </form>
         <ul>
             <li v-for="(item, key) in obj">{{item}} —— <button @click="handleRemove(key)">remove</button></li>
@@ -27,27 +28,37 @@
                 inputTxt: ''
             },
             mounted () {
-                console.log('mounted');
                 if (localStorage.length !== 0) {
                     this.obj = localStorage;
-                    console.log(this.obj + ' ' + typeof this.obj);
                     for (const index in this.obj) {
-                        // if (typeof index === 'number') {
-                            console.log(index + ' ' + typeof index);
-                        // }
+                        this.count = this.obj.length;
                     }
                 }
             },
             methods: {
                 handleAdd () {
-                    localStorage.setItem(this.count, this.inputTxt);
-                    this.obj = localStorage;
-                    this.count++;
-                    this.inputTxt = '';
+                    if (this.inputTxt !== '') {
+                      localStorage.setItem(this.count, this.inputTxt);
+                      this.obj = localStorage;
+                      this.count++;
+                      this.inputTxt = '';
+                    }
                 },
                 handleRemove (key) {
+                    let newObj = {};
                     localStorage.removeItem(key);
-                    this.obj = localStorage;             
+                    for (const item in localStorage) {
+                      if (localStorage.hasOwnProperty(item)) {
+                        newObj[item] = localStorage[item];
+                        console.log(newObj[item]);
+                      }
+                    }
+                    this.obj = newObj;
+                },
+                handleReset () {
+                  localStorage.clear();
+                  this.obj = {};
+                  this.count = 0;
                 }
             }
         })
