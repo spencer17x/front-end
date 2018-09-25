@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双飞翼布局</title>
+  <style>
+    body {
+      margin: 0;
+      min-width: 600px;
+    }
+    footer, header {
+      background: #ccc;
+      text-align: center;
+    }
+    .text {
+      width: 200px;
+      height: 200px;
+      float: left;
+      text-align: center;
+      line-height: 200px;
+    }
+    .left {
+      background: red;
+      margin-left: -100%;
+      opacity: 0.5;
+    }
+    .right {
+      background: green;
+      margin-left: -200px;
+    }
+    .main {
+      background: gray;
+      width: 100%;
+    }
+    .main-content {
+      margin: 0 200px;
+      word-break: break-all;
+    }
+    .bd:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 双飞翼布局则是中间栏不变，将内容部分为两边腾开位置 -->
+  <header>双飞翼布局</header>
+  <div class="bd">
+    <div class="main text">
+      <div class="main-content">main</div>
+    </div>
+    <div class="left text">
+      left
+    </div>
+    <div class="right text">
+      right
+    </div>
+  </div>
+  <footer>footer</footer>
+</body>
+
+</html>
