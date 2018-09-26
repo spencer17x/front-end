@@ -1,12 +1,3 @@
----
-title: css垂直居中的方法
-date: 2018-07-21 18:53:54
-tags:
-	- 2018.7
-categories:
-        - html和css学习笔记
----
-
 # CSS Transform让百分比宽高布局元素水平垂直居中
 
 HTML代码

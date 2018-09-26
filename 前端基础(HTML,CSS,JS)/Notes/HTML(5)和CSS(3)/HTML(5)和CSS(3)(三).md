@@ -4,7 +4,7 @@
 
 ### html中外部css文件link加载
 
-<link rel="stylesheet" type="text/css" href="xxx.css">为异步加载，即加载过程中同时下载css文件。
+\<link rel="stylesheet" type="text/css" href="xxx.css"\>为异步加载，即加载过程中同时下载css文件。
 
 ### 选择器优先级
 

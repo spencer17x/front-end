@@ -80,3 +80,12 @@ react fiber 指的是 react 16 版本。
 >
 > 2.它使得跨端应用得以实现。React Native
 
+# 虚拟 DOM 中的 diff 算法
+
+- setState 可以把多次 setState 结合成一次，减少虚拟 DOM 比对的次数，setState 是异步的
+- 同层虚拟 DOM 比对，如果一层不满足匹配的要求，后面就不会再比对，直接废弃，用新的替换掉老的
+- key 值尽量不要用 index。
+
+key 值不用 index 的原因：
+
+循环时假设，key 为 index 即 a: 0，b: 1，c: 2，数据发生改变时假设 a 被删除，则 key 为 b: 0，c: 1。以前的 b 与现在的 b 无法直接建立起关系，导致 key 值不稳定，无法提升虚拟 DOM 比对的性能了。
