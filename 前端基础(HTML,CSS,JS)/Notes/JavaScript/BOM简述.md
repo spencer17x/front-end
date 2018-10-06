@@ -1,12 +1,3 @@
----
-title: BOM简述
-date: 2018-07-27 23:51:16
-tags:
-	- 2018.7
-categories:
-	- JavaScript学习笔记
----
-
 # 获取滚动条滚动距离
 
 ```javascript

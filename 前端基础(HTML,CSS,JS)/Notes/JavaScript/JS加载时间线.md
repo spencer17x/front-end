@@ -1,12 +1,3 @@
----
-title: JS加载时间线
-date: 2018-07-29 19:30:13
-tags:
-	- 2018.7
-categories:
-	- JavaScript学习笔记
----
-
 js时间线:
 
 1. 创建Document对象，开始解析web页面。解析HTML元素和他们的文本内容后添加Element对象和Text节点到文档中。这个阶段document.readyState = 'loading'。

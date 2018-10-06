@@ -1,12 +1,3 @@
----
-title: JS中e.target、e.currentTarget、this的区别
-date: 2018-08-05 16:33:10
-tags:
-	- 2018.8
-categories:
-	- JavaScript学习笔记
----
-
 e.target 指向触发事件监听的对象
 
 e.currentTarget 指向添加监听事件的对象

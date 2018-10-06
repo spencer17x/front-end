@@ -1,12 +1,3 @@
----
-title: JavaScript面向对象(一)
-date: 2018-07-14 23:48:20
-tags:
-        - 2018.7
-categories:
-        - JavaScript学习笔记
----
-
 # 预编译四部曲
 
 1. 创建AO对象(执行期上下文)

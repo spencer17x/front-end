@@ -1,11 +1,3 @@
----
-title: JavaScript获取css 行间样式，内连样式和外链样式的方式
-date: 2018-06-24 23:02:13
-tags:
-	- 2018.6
-categories:
-	- JavaScript学习笔记
----
 # 行内样式获取
 
 ```
@@ -13,7 +5,7 @@ categories:
 
 <script>
 
-​   var odiv=document.getElementById('div1');　
+	var odiv=document.getElementById('div1');　
 
 //先获取到要获取样式的元素标签，也就是获取到div1
 

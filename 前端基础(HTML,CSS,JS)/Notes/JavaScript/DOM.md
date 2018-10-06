@@ -1,12 +1,3 @@
----
-title: dom
-date: 2018-07-23 23:21:57
-tags:
-	- 2018.7
-categories:
-	- JavaScript学习笔记
----
-
 # DOM基本操作
 
 - document代表整个文档

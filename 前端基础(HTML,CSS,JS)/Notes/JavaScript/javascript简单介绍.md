@@ -1,12 +1,3 @@
----
-title: javascript简单介绍
-date: 2018-07-06 23:22:34
-tags:
-        - 2018.7
-categories:
-        - JavaScript学习笔记
----
-
 # 浏览器组成
 
 1. shell部分

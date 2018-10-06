@@ -1,15 +1,6 @@
----
-title: JavaScript对象中属性的getter和setter方法
-date: 2018-07-13 22:34:15
-tags:
-	- 2018.7
-categories:
-	- JavaScript学习笔记
----
-
 JavaScript对象的属性是由名字、值和一组特性（可写、可枚举、可配置等）构成的。在ECMAScript 5中，属性值可以用一个或两个方法代替，这两个方法就是getter和setter。
 
-```
+```javascript
 var myObj = {
     a: 2,
     get b(){
@@ -29,7 +20,7 @@ console.log(myObj.b);//3
 
 当一个属性被定义为存取器属性时，JavaScript会忽略它的value和writable特性，取而代之的是set和get（还有configurable和enumerable）特性。
 
-```
+```javascript
 var myObj = {
     get a(){
         return 2;
@@ -43,7 +34,7 @@ console.log(myObj.a);//2
 
 如上面代码所示，由于我们只定义了属性a的getter，所以对a进行设置（即赋值）时set会忽略赋值操作，不会抛出错误。
 
-```
+```javascript
 var myObj = {
     get a(){
         return this._a_;
@@ -58,7 +49,7 @@ console.log(myObj.a);//3
 
 正确的写法如上所示。**getter和setter方法中的this都指向myObj对象。**这里我们把赋值操作中的3存储到另一个中间变量 `_a_` 中。名称 `_a_` 只是一种惯例，并没有其它任何特殊行为，它只是一个普通的属性。把它换成其它任意合法名称如 `_b_` 都行，甚至可以在外面将它打印出来。
 
-```
+```javascript
 var myObj = {
     get a(){
         return this._b_;
@@ -74,7 +65,7 @@ console.log(myObj._b_);//3
 
 另外，存取器属性也是可以继承的：
 
-```
+```javascript
 var myObj = {
     get a(){
         return this._b_;
