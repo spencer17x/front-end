@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas1" width="200" height="100" style="border: 1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas2" width="200" height="100" style="border: 1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas3" width="200" height="100" style="border: 1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas4" width="200" height="100" style="border: 1px solid #d3d3d3;"></canvas>
+    <script>
+        let c = document.getElementById('myCanvas'), //首先，找到 <canvas> 元素
+            ctx = c.getContext('2d'); //然后，创建 context 对象,getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法
+        ctx.fillStyle = '#ff0000'; //设置fillStyle属性可以是CSS颜色，渐变，或图案。fillStyle 默认设置是#000000（黑色）。
+        ctx.fillRect(0,0,150,75); //定义了矩形当前的填充方式 fillRect(x,y,width,height)
+
+        //moveTo(x,y) 定义线条开始坐标,lineTo(x,y) 定义线条结束坐标,然后使用 stroke() 方法来绘制线条
+        let c1 = document.getElementById('myCanvas1'),
+            ctx1 = c1.getContext('2d');
+        ctx1.moveTo(100,0);
+        ctx1.lineTo(200,100);
+        ctx1.moveTo(200,100);
+        ctx1.lineTo(100,100);
+        ctx1.moveTo(100,100);
+        ctx1.lineTo(100,0);
+        ctx1.stroke();
+
+        //在canvas中绘制圆形
+        let c2 = document.getElementById('myCanvas2'),
+            ctx2 = c2.getContext('2d');
+        ctx2.beginPath();
+        ctx2.arc(100,50,50,0,2*Math.PI);
+        ctx2.stroke();
+
+        //文本
+        //font - 定义字体, fillText(text,x,y) - 在 canvas 上绘制实心的文本, strokeText(text,x,y) - 在 canvas 上绘制空心的文本
+        let c3 = document.getElementById('myCanvas3'),
+            ctx3 = c3.getContext('2d');
+        ctx3.font = '30px Arial';
+        // ctx3.fillText('hello world',20,60); //实心字
+        ctx3.strokeText('hello world',20,60); //空心字
+
+        //渐变
+        //createLinearGradient(x,y,x1,y1) - 创建线条渐变，createRadialGradient(x,y,r,x1,y1,r1) - 创建一个径向/圆渐变
+        //addColorStop()方法指定颜色停止，参数使用坐标来描述，可以是0至1.
+        let c4 = document.getElementById('myCanvas4'),
+            ctx4 = c4.getContext('2d'),
+            // grd = ctx4.createLinearGradient(0,0,200,0);
+            grd = ctx4.createRadialGradient(75,50,5,90,60,100);
+        grd.addColorStop(0,'red');
+        grd.addColorStop(1,'white');
+        ctx4.fillStyle = grd;
+        ctx4.fillRect(10,10,150,80);
+
+    </script>
+</body>
+</html>

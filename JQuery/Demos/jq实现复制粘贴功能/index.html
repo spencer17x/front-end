@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jq实现复制粘贴</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.js"></script>
+</head>
+<body>
+  <div class="copy-text" style="display: none;">这是你需要复制粘贴的文本信息</div>
+  <button class="copy-btn" data-clipboard-action="copy" data-clipboard-target=".copy-text">复制粘贴</button>
+  <button class="toggle">toggle</button>
+  <script>
+    let clipboard = new Clipboard('.copy-btn');
+    clipboard.on('success', function(e) {
+      alert('复制粘贴');
+    });
+    clipboard.on('error', function(e) {
+      alert('复制失败');
+    });
+    $('.toggle').click(function () {
+      $('.copy-text').show();
+    });
+  </script>
+</body>
+</html>

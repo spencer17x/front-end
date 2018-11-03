@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <title>图片预加载</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .pic {
+      text-align: center;
+    }
+
+    .toggle-btn {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .toggle-btn a {
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+      margin: auto 10px;
+    }
+
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #eee;
+    }
+
+    .progress {
+      margin: 300px;
+    }
+  </style>
+  <script src="preload.js"></script>
+  <!-- <script>
+    $(function () {
+      let images = [
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216900&di=fa41b60a17f4455192cfb36efa948e78&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725906000_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216899&di=dc44945b200211931314f6decbeee70d&imgtype=0&src=http%3A%2F%2Fpic11.nipic.com%2F20101119%2F6239728_231052061272_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216898&di=6e8a5202cefaffc86fa17d76cbae0074&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F908fa0ec08fa513d37d14ffd376d55fbb2fbd99d.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216898&di=903b84bb24c8b06a3ea0bec27f24521c&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F77094b36acaf2edd034fb1fb871001e939019362.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216897&di=b84b43cba0f348ffc1b2daa14e95bab9&imgtype=0&src=http%3A%2F%2Fpic31.nipic.com%2F20130728%2F7447430_145214729000_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216897&di=b560accea761cdea1119ce77fdc2f6e3&imgtype=0&src=http%3A%2F%2Fpic14.nipic.com%2F20110512%2F5198878_155319332171_2.jpg'
+      ]
+      let index = 0;
+      let len = images.length;
+      let count = 0;
+      let $progress = $('.progress');
+      
+      $.each(images, function (i, src) {
+        let imgObj = new Image();
+        $(imgObj).on('load error', function () {
+          $progress.html(Math.round((count + 1)/len*100) + '%');
+          if (count >= len - 1) {
+            $('.loading').hide();
+            document.title = '1/' + len;
+          }
+          count++;
+        });
+        imgObj.src = src;
+      })
+
+      $('.toggle-btn').on('click', '.click-btn', function (e) {
+        let btnType = $(this).data('btn');
+        if (btnType === 'prevBtn') {
+          index = Math.max(0, --index);
+        } else {
+          index = Math.min(len - 1, ++index);
+        }
+        document.title = index + 1 + '/' + len;
+        $('.img').attr('src', images[index]);
+      });
+    });
+  </script> -->
+  <script>
+    $(function () {
+      let images = [
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216900&di=fa41b60a17f4455192cfb36efa948e78&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725906000_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216899&di=dc44945b200211931314f6decbeee70d&imgtype=0&src=http%3A%2F%2Fpic11.nipic.com%2F20101119%2F6239728_231052061272_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216898&di=6e8a5202cefaffc86fa17d76cbae0074&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F908fa0ec08fa513d37d14ffd376d55fbb2fbd99d.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216898&di=903b84bb24c8b06a3ea0bec27f24521c&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F77094b36acaf2edd034fb1fb871001e939019362.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216897&di=b84b43cba0f348ffc1b2daa14e95bab9&imgtype=0&src=http%3A%2F%2Fpic31.nipic.com%2F20130728%2F7447430_145214729000_2.jpg',
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216897&di=b560accea761cdea1119ce77fdc2f6e3&imgtype=0&src=http%3A%2F%2Fpic14.nipic.com%2F20110512%2F5198878_155319332171_2.jpg'
+      ];
+
+      let $progress = $('.progress');
+      let len = images.length;
+      let index = 0;
+
+      $.preload(images, {
+        each: function (count) {
+          $progress.html(Math.round((count + 1) / len * 100) + '%');
+        },
+        all: function () {
+          $('.loading').hide();
+          document.title = '1/' + len;
+        }
+      });
+
+      $('.toggle-btn').on('click', '.click-btn', function (e) {
+        let btnType = $(this).data('btn');
+        if (btnType === 'prevBtn') {
+          index = Math.max(0, --index);
+        } else {
+          index = Math.min(len - 1, ++index);
+        }
+        document.title = index + 1 + '/' + len;
+        $('.img').attr('src', images[index]);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="loading">
+    <p class="progress">0%</p>
+  </div>
+
+  <div class="pic">
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539713216900&di=fa41b60a17f4455192cfb36efa948e78&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725906000_2.jpg"
+      alt="pic" width="860" height="460" class="img">
+  </div>
+  <div class="toggle-btn">
+    <a href="javascript: void(0);" data-btn="prevBtn" class="click-btn">上一页</a>
+    <a href="javascript: void(0);" data-btn="nextBtn" class="click-btn">下一页</a>
+  </div>
+</body>
+
+</html>

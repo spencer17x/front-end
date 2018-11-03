@@ -80,6 +80,8 @@ react fiber 指的是 react 16 版本。
 >
 > 2.它使得跨端应用得以实现。React Native
 
+> **JSX ——> createElement ——> 虚拟DOM(JS对象) ——> 真实的DOM**
+
 # 虚拟 DOM 中的 diff 算法
 
 - setState 可以把多次 setState 结合成一次，减少虚拟 DOM 比对的次数，setState 是异步的
