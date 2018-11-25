@@ -1,3 +1,13 @@
+# React 介绍
+
+* Facebook 开源的一个 JavaScript 库
+* React 结合生态库构成一个 MV* 框架
+* React 特点
+  * Declarative（声明式编码）
+  * Component-Based（组件化编码）
+  * 高效 — 高效的 DOM Diff 算法，最小化页面重绘
+  * 单项数据流
+
 **编程式实现** 
 
 * 需要以具体代码表达在哪里（where）做什么（what），如何实现（how）
