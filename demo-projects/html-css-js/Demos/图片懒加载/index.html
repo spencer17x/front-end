@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图片懒加载</title>
+  <style>
+    img {
+      display: block;
+      margin-bottom: 50px;
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+  <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+
+  <script>
+    let img = document.querySelectorAll('img');
+    let num = img.length;
+    let n = 0; // 存储图片加载到的位置，避免每次都从第一张图片开始遍历
+
+    lazyload(); // 页面载入完毕加载可是区域内的图片
+
+    window.onscroll = lazyload;
+
+    function lazyload() { // 监听页面滚动事件
+      let seeHeight = document.documentElement.clientHeight; // 可视区域高度
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop; // 滚动条距离顶部的高度
+      for (let i = n; i < num; i++) {
+        if (img[i].offsetTop < seeHeight + scrollTop) {
+          if (img[i].getAttribute('src') == 'default.jpg') {
+            img[i].src = img[i].getAttribute('data-src');
+          }
+          n = i + 1;
+        }
+      }
+    }
+
+    // function throttle(func, delay, time) {
+    //   let timeout,
+    //       startTime = new Date();
+    //   return function () {
+    //     let that = this,
+    //         args = arguments,
+    //         curTime = new Date();
+    //     clearTimeout(timeout);
+        
+    //     if (curTime - startTime >= time) {
+    //       func.apply(that, args);
+    //       startTime = curTime;
+    //     } else {
+    //       timeout = setTimeout(func, delay);
+    //     }
+    //   };
+    // }
+  </script>
+</body>
+
+</html>
