@@ -1,41 +1,45 @@
-# React.lazy
+# 高阶函数介绍
 
-> 注意：
->
-> `React.lazy` 和 Suspense 尚不可用于服务器端呈现。如果要在服务器呈现的应用程序中进行代码拆分，我们建议使用 [可加载组件](https://github.com/smooth-code/loadable-components)。它有一个很好的 [指南，用于捆绑服务器端渲染](https://github.com/smooth-code/loadable-components/blob/master/packages/server/README.md)。
+## 基本概念：
 
-`React.lazy` 目前仅支持默认导出。如果要导入的模块使用命名导出，则可以创建一个中间模块，将其重新导出为默认模块。这可确保树木继续工作，并且您不会引入未使用的组件。
+1. 函数可以作为参数被传递
+2. 函数可以作为返回值输出
 
-> lazy 要和 Suspense 一起用。
+# 高阶组件
 
-# 基于路由的代码拆分
+## 基本概念
 
-![](D:\Sev\front-end\Notes\React\汇总\react高阶组件\error\1.png)
+1. 高阶组件就是接受一个组件作为参数并返回一个新组件的函数
+2. 高阶组件是一个函数，并不是组件
 
-![](D:\Sev\front-end\Notes\React\汇总\react高阶组件\error\3.png)
+## 使用高阶组件
 
-![](D:\Sev\front-end\Notes\React\汇总\react高阶组件\error\2.png)
+1. higherOrderComponent(WrapperComponent)
+2. @ higherOrderComponent 
 
-**报错原因：**lazy 的返回值不是 function，提供给 Route 的的类型是 Object 而不是 function，期望返回的是 function。
+## 在 create-react-app 中使用装饰器
 
-**解决方法：**
+```shell
+$ npm run eject
 
-![](D:\Sev\front-end\Notes\React\汇总\react高阶组件\error\4.jpg)
+# 安装相关插件：
+# 针对 react：
+$ npm install bebel-preset-stage-2 --save-dev
+$ npm install babel-preset-react-native-stage-0 --save-dev
 
-# 命名出口
-
-`React.lazy`目前仅支持默认导出。如果要导入的模块使用命名导出，则可以创建一个中间模块，将其重新导出为默认模块。这可确保树木继续工作，并且您不会引入未使用的组件。
-
-```js
-// ManyComponents.js
-export const MyComponent = /* ... */;
-export const MyUnusedComponent = /* ... */;
-
-// MyComponent.js
-export { MyComponent as default } from "./ManyComponents.js";
-
-// MyApp.js
-import React, { lazy } from 'react';
-const MyComponent = lazy(() => import("./MyComponent.js"));
+# 根目录下创建 .babelrc 
+{
+    "presets": ["react-native-stage-0/decorator-support"]
+}
 ```
+
+# 高阶组件应用
+
+## 代理方式的高阶组件
+
+返回的新组件类直接继承自 React.Component 类，新组件扮演的角色传入参数组件的一个代理，在新组件的 render 函数中，将被包裹组件渲染出来，除了高阶组件自己要做得工作，其余功能全都转手给了被包裹的组件。
+
+## 继承方式的高阶组件
+
+采用继承关联作为参数的组件和返回的组件，假如传入的组件参数是 WrappedComponent，那么返回的组件就直接继承自 WrappedComponent。
 

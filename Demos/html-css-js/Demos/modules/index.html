@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>YDKJS - 现代的模块</title>
+</head>
+<body>
+  <script>
+    var MyModules = (function Manager() {
+      var modules = {};
+
+      function define(name, deps, impl) {
+        for (var i = 0; i < deps.length; i++) {
+          /**
+           * 在 define foo 的时候
+           * deps[i] = modules[deps[i]] => deps[0] = modules['bar']
+           */ 
+          deps[i] = modules[deps[i]]
+        }
+        /**
+         * 这为一个模块调用了它的定义的包装函数（传入所有依赖）
+         * 并将返回值，也就是模块的API，存储到一个用名称追踪的内部模块列表中
+         * 即在 define foo 的时候可以调用模块 bar 的方法
+         */
+        modules[name] = impl.apply(impl, deps);
+        console.log(modules);
+      }
+
+      function get(name) {
+        return modules[name]
+      }
+
+      return {
+        define,
+        get
+      };
+    })();
+
+    /*
+     *  返回模块 {bar: {hello: f hello(who)}}
+     */
+    MyModules.define('bar', [], function () {
+      function hello(who) {
+        return `Let me introduce：${who}`;
+      }
+      return {
+        hello
+      }
+    }) 
+
+    /*
+     *  返回模块 {bar: {hello: f hello(who)}, foo: {awesome: f awesome()}}
+     */
+    MyModules.define('foo', ['bar'], function (bar) {
+      var hungry = 'hippo';
+
+      function awesome() {
+        console.log(bar.hello(hungry).toUpperCase());
+      }
+      
+      return {
+        awesome
+      }
+    })
+
+    var bar = MyModules.get( "bar" );
+    var foo = MyModules.get( "foo" );
+    
+    console.log(
+      bar.hello( "hippo" )
+    ); // Let me introduce: hippo
+
+    foo.awesome(); // LET ME INTRODUCE: HIPPO
+  </script>
+</body>
+</html>
