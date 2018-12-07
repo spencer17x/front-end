@@ -12,3 +12,7 @@ width: fit-content(<https://www.zhangxinxu.com/wordpress/2016/05/css3-width-max-
 
 svg动画：https://codepen.io/chrisgannon/
 
+检测站点，全球各个地区加载时间的网站：https://www.dotcom-tools.com/website-speed-test.aspx
+
+**查看不同服务商的DNS lookup time**：https://www.dnsperf.com/
+
