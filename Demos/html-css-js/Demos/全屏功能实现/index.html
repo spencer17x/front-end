@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>全屏功能</title>
+  <style>
+    #full_screen {
+      width: 100px;
+      height: 100px;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      margin-left: -50px;
+      margin-top: -50px;
+      background: red;
+    }
+
+    #full_screen:not(:root):-webkit-full-screen::backdrop {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background: black;
+    }
+
+    #full_screen:not(:root):-webkit-full-screen {
+      object-fit: contain;
+      position: fixed !important;
+      top: 0px !important;
+      right: 0px !important;
+      bottom: 0px !important;
+      left: 0px !important;
+      box-sizing: border-box !important;
+      min-width: 0px !important;
+      max-width: none !important;
+      min-height: 0px !important;
+      max-height: none !important;
+      width: 100% !important;
+      height: 100% !important;
+      transform: none !important;
+      margin: 0px !important;
+    }
+
+    /* 针对dom的全屏设置 */
+    #full_screen.div:-webkit-full-screen {
+      background: #fff;
+    }
+
+    /* 全屏属性 */
+    #full_screen:-webkit-full-screen {}
+
+    #full_screen:-moz-full-screen {}
+
+    #full_screen:-ms-fullscreen {}
+
+    /* 全屏伪类 当前chrome:70 不支持 */
+    #full_screen:full-screen {}
+
+    #full_screen:fullscreen {
+      /* IE11支持 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="full_screen"></div>
+
+  <script>
+    // 全屏API：
+    // 1. 浏览器是否支持全屏模式：document.fullscreenEnabled
+    // 2. 使元素进入全屏模式：Element.requestFullscreen()
+    // 3. 退出全屏：document.exitFullscreen()
+    // 4. 检查当前是否有节点处于全屏状态：document.fullscreenElement
+    // 5. 进入全屏/离开全屏，触发事件：document.fullscreenchange
+    // 6. 无法进入全屏时触发：document.fullscreenerror
+
+    let FullScreenObj = {
+      /**
+       * @description: 是否支持全屏+判断浏览器前缀
+       * @param {Function} fn 不支持全屏的回调函数 这里设了一个默认值
+       */
+      isFullscreen(fn) {
+        let fullscreenEnabled;
+        // 判断浏览器前缀
+        if (document.fullscreenEnabled) {
+          fullscreenEnabled = document.fullscreenEnabled;
+        } else if (document.webkitFullscreenEnabled) {
+          fullscreenEnabled = document.webkitFullscreenEnabled;
+          this.prefixName = 'webkit';
+        } else if (document.mozFullScreenEnabled) {
+          fullscreenEnabled = document.mozFullScreenEnabled;
+          this.prefixName = 'moz';
+        } else if (document.msFullscreenEnabled) {
+          fullscreenEnabled = document.msFullscreenEnabled;
+          this.prefixName = 'ms';
+        }
+        if (!fullscreenEnabled) {
+          if (fn !== undefined) fn(); // 执行不支持全屏的回调
+          this.isFullscreenData = false;
+        }
+      },
+      /**
+      * @description: 将传进来的元素全屏
+      * @param {String} domName 要全屏的dom名称
+      */
+      Fullscreen(domName) {
+        const element = document.querySelector(domName); // 获取dom
+        const methodName =
+          this.prefixName === ''
+            ? 'requestFullscreen'
+            : `${this.prefixName}RequestFullScreen`; // API前缀
+        element[methodName](); // 调用全屏
+      },
+      /**
+       * 退出全屏
+       */
+      exitFullscreen() {
+        const methodName =
+          this.prefixName === ''
+            ? 'exitFullscreen'
+            : `${this.prefixName}ExitFullscreen`; // API 前缀
+        document[methodName](); // 调用
+      }
+    }
+  </script>
+</body>
+
+</html>
