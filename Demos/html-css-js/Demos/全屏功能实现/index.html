@@ -7,17 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>全屏功能</title>
   <style>
-    #full_screen {
-      width: 100px;
-      height: 100px;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      margin-left: -50px;
-      margin-top: -50px;
-      background: red;
-    }
-
     #full_screen:not(:root):-webkit-full-screen::backdrop {
       position: fixed;
       top: 0px;
@@ -63,12 +52,40 @@
     #full_screen:fullscreen {
       /* IE11支持 */
     }
+    body {
+      margin: 0;
+    }
+    #full_screen {
+      width: 300px;
+      height: 500px;
+      background: red;
+      margin: auto;
+    }
+    #exit_full_screen {
+      z-index: 999;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, .7);
+      border-radius: 50%;
+      position: fixed;
+      left: 50%;
+      top: 10px;
+      transform: translateX(-50%);
+      text-align: center;
+      line-height: 50px;
+      color: #fff;
+      font-size: 32px;
+      /* display: none; */
+      opacity: 0;
+      transition: all .4s;
+    }
   </style>
 </head>
 
 <body>
-  <div id="full_screen"></div>
-
+  <div id="full_screen">
+    <div id="exit_full_screen">X</div>
+  </div>
   <script>
     // 全屏API：
     // 1. 浏览器是否支持全屏模式：document.fullscreenEnabled
@@ -104,15 +121,15 @@
         }
       },
       /**
-      * @description: 将传进来的元素全屏
-      * @param {String} domName 要全屏的dom名称
-      */
+       * @description: 将传进来的元素全屏
+       * @param {String} domName 要全屏的dom名称
+       */
       Fullscreen(domName) {
         const element = document.querySelector(domName); // 获取dom
         const methodName =
-          this.prefixName === ''
-            ? 'requestFullscreen'
-            : `${this.prefixName}RequestFullScreen`; // API前缀
+          this.prefixName === '' ?
+          'requestFullscreen' :
+          `${this.prefixName}RequestFullScreen`; // API前缀
         element[methodName](); // 调用全屏
       },
       /**
@@ -120,12 +137,78 @@
        */
       exitFullscreen() {
         const methodName =
-          this.prefixName === ''
-            ? 'exitFullscreen'
-            : `${this.prefixName}ExitFullscreen`; // API 前缀
+          this.prefixName === '' ?
+          'exitFullscreen' :
+          `${this.prefixName}ExitFullscreen`; // API 前缀
         document[methodName](); // 调用
+      },
+      /**
+       * @description: 检测有没有元素处于全屏状态
+       * @return 布尔值
+       */
+      isElementFullScreen() {
+        const fullscreenElement =
+          document.fullscreenElement ||
+          document.msFullscreenElement ||
+          document.mozFullScreenElement ||
+          document.webkitFullscreenElement; // 有前缀的f是大写，没前缀是小写
+        if (fullscreenElement === null) {
+          return false; // 当前没有元素在全屏状态
+        } else {
+          return true; // 有元素在全屏状态
+        }
+      },
+      /**
+       * @description: 监听进入/离开全屏
+       * @param {Function} enter 进入全屏的回调
+       *  @param {Function} quit 离开全屏的回调
+       */
+      screenChange(enter, quit) {
+        if (!this.isFullscreenData) return;
+        const methodName = `on${this.prefixName}fullscreenchange`;
+        document[methodName] = e => {
+          if (this.isElementFullScreen()) {
+            enter && enter(e); // 进入全屏回调
+          } else {
+            quit && quit(e); // 离开全屏的回调
+          }
+        };
+      },
+      /**
+       * @description: 浏览器无法进入全屏时触发
+       * @param {Function} enterErrorFn 回调
+       */
+      screenError(enterErrorFn) {
+        const methodName = `on${this.prefixName}fullscreenerror`;
+        document[methodName] = e => {
+          enterErrorFn && enterErrorFn(e)
+        };
       }
     }
+    let fullScreenDom = document.querySelector('#full_screen');
+    let exitFullScreen = document.querySelector('#exit_full_screen');
+    fullScreenDom.addEventListener('click', function () {
+      // 点击全屏
+      this.requestFullscreen();
+    });
+    fullScreenDom.addEventListener('mousemove', function (e) {
+      if (e.y < 50) {
+        // exitFullScreen.style.display = 'block';
+        exitFullScreen.style.opacity = '1';
+        exitFullScreen.style.top = '20px';        
+      }
+    });
+    fullScreenDom.addEventListener('mousemove', function (e) {
+      console.log(e.y);
+      if (e.y >= 50) {
+        // exitFullScreen.style.display = 'none';
+        exitFullScreen.style.opacity = '0';
+        exitFullScreen.style.top = '0';                
+      }
+    });
+    exitFullScreen.addEventListener('click', function () {
+      document.exitFullscreen();
+    });
   </script>
 </body>
 
