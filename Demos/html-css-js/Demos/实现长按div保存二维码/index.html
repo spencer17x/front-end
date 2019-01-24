@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>实现长按div保存二维码</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: red;
+    }
+    .box {
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+    .bg {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <img src="https://xcx.alicdn2.hexiaoxiang.com/qrcode/2019-1-21/partner/app_code_3303.jpg" alt="">
+    <img class="bg" src="https://xcx.alicdn2.hexiaoxiang.com/qrcode/2019-1-21/partner/app_code_3303.jpg" alt="">
+  </div>
+</body>
+</html>
